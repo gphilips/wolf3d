@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   wolf3d.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/03/29 18:03:01 by gphilips          #+#    #+#             */
+/*   Updated: 2017/03/29 19:18:48 by gphilips         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef WOLF3D_H
 # define WOLF3D_H
 
@@ -7,6 +19,8 @@
 # include <stdlib.h>
 # include <mlx.h>
 # include <math.h>
+
+# include <stdio.h>
 
 # define ESC 53
 # define P 35
@@ -35,24 +49,23 @@ typedef struct	s_color
 	int		r;
 	int		g;
 	int		b;
-
 }				t_color;
 
-typedef struct	s_point
+
+typedef struct	s_map
 {
-	float	x1;
-	float	x2;
-	float	y1;
-	float	y2;
-	float	c_r;
-	float	c_i;
-	float	z_r;
-	float	z_i;
-	int		max_iter;
-	float	scale;
-	float	zoom_x;
-	float	zoom_y;
-}				t_point;
+	int		x;
+	int		y;
+	int		type;
+}				t_map;
+
+typedef struct	s_file
+{
+	int		nb_x;
+	int		nb_y;
+	char	**split;
+	t_map	**map;
+}				t_file;
 
 typedef struct	s_env
 {
@@ -66,9 +79,13 @@ typedef struct	s_env
 	int		endian;
 	char	*data;
 	int		ftl;
-	t_point	point;
+	t_list	*lst;
+	t_file	file;
 	t_color	color;
 }				t_env;
 
+t_env	*ft_init_all(t_env *e);
+int		ft_read_file(int fd, t_env *e);
+t_map	**ft_create_int_tab(t_list *lst, t_env *e);
 void	ft_create_win(t_env *e);
 #endif

@@ -1,6 +1,18 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: gphilips <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/03/29 19:19:11 by gphilips          #+#    #+#              #
+#    Updated: 2017/03/29 19:19:41 by gphilips         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = wolf3d
 
-SRC = create_win.c main.c
+SRC = init.c read_file.c map.c create_win.c main.c
 CFLAGS = -Wall -Werror -Wextra
 MLX = -lmlx -framework OpenGL -framework AppKit
 LIBDIR = libft/
