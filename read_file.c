@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 18:04:28 by gphilips          #+#    #+#             */
-/*   Updated: 2017/03/29 18:38:23 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/03/31 18:24:53 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	ft_get_size(t_env *e)
 	tmp = e->lst;
 	while (tmp)
 	{
-		e->file.split = ft_strsplit(tmp->content, ' ');
+		e->file.split = ft_strsplit(tmp->content, ',');
 		i = -1;
 		while (e->file.split[++i])
 			free(e->file.split[i]);
@@ -51,13 +51,11 @@ static int	ft_get_size(t_env *e)
 int			ft_read_file(int fd, t_env *e)
 {
 	char	*line;
-	t_list	*start;
 
 	e->lst = NULL;
 	line = NULL;
 	get_next_line(fd, &line);
 	e->lst = ft_lstnew(line, ft_strlen(line) + 1);
-	start = e->lst;
 	free(line);
 	e->file.nb_y++;
 	while (get_next_line(fd, &line))

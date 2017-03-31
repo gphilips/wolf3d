@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 18:03:01 by gphilips          #+#    #+#             */
-/*   Updated: 2017/03/29 19:18:48 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/03/31 17:59:51 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,12 @@ typedef struct	s_color
 }				t_color;
 
 
-typedef struct	s_map
-{
-	int		x;
-	int		y;
-	int		type;
-}				t_map;
-
 typedef struct	s_file
 {
 	int		nb_x;
 	int		nb_y;
+	int		**map;
 	char	**split;
-	t_map	**map;
 }				t_file;
 
 typedef struct	s_env
@@ -86,6 +79,7 @@ typedef struct	s_env
 
 t_env	*ft_init_all(t_env *e);
 int		ft_read_file(int fd, t_env *e);
-t_map	**ft_create_int_tab(t_list *lst, t_env *e);
+int		**ft_create_int_tab(t_list *lst, t_env *e);
 void	ft_create_win(t_env *e);
+void	ft_draw_map(t_env *e);
 #endif
