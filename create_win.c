@@ -34,7 +34,8 @@ int		ft_expose_hook(t_env *e)
 {
 	e->img = mlx_new_image(e->mlx, e->win_x, e->win_y);
 	e->data = mlx_get_data_addr(e->img, &e->bpp, &e->sizeline, &e->endian);
-	
+	ft_create_int_tab(e->lst, e);
+	ft_draw_map(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 //	ft_instruction(e);
 	mlx_destroy_image(e->mlx, e->img);

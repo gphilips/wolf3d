@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 18:04:28 by gphilips          #+#    #+#             */
-/*   Updated: 2017/03/31 18:24:53 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/02 16:27:15 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ int			ft_read_file(int fd, t_env *e)
 
 	e->lst = NULL;
 	line = NULL;
-	get_next_line(fd, &line);
+	if (get_next_line(fd, &line) < 1)
+		return (-1);
 	e->lst = ft_lstnew(line, ft_strlen(line) + 1);
 	free(line);
 	e->file.nb_y++;

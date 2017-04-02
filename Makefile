@@ -6,13 +6,13 @@
 #    By: gphilips <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/29 19:19:11 by gphilips          #+#    #+#              #
-#    Updated: 2017/03/29 19:19:41 by gphilips         ###   ########.fr        #
+#    Updated: 2017/04/02 16:42:26 by gphilips         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = wolf3d
 
-SRC = init.c read_file.c map.c create_win.c main.c
+SRC = init.c read_file.c map.c draw.c create_win.c free.c main.c
 CFLAGS = -Wall -Werror -Wextra
 MLX = -lmlx -framework OpenGL -framework AppKit
 LIBDIR = libft/

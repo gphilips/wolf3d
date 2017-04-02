@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/02 14:42:17 by gphilips          #+#    #+#             */
+/*   Updated: 2017/04/02 14:53:52 by gphilips         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 void	ft_free_node(void *content, size_t size)
@@ -7,13 +19,13 @@ void	ft_free_node(void *content, size_t size)
 	size = 0;
 }
 
-void	ft_free_map(t_map **map, t_env *e)
+void	ft_free_map(t_env *e)
 {
-	int		i;
+	int		y;
 
-	i = -1;
-	while (++i < e->file.nb_y)
-		free(map[i]);
-	free(map);
-	map = NULL;
+	y = -1;
+	while (++y < e->file.nb_y)
+		free(e->file.map[y]);
+	free(e->file.map);
+	e->file.map = NULL;
 }

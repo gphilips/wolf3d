@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 18:03:01 by gphilips          #+#    #+#             */
-/*   Updated: 2017/03/31 17:59:51 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/02 16:39:20 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,11 @@ typedef struct	s_env
 
 t_env	*ft_init_all(t_env *e);
 int		ft_read_file(int fd, t_env *e);
-int		**ft_create_int_tab(t_list *lst, t_env *e);
+int		ft_create_int_tab(t_list *lst, t_env *e);
 void	ft_create_win(t_env *e);
+
 void	ft_draw_map(t_env *e);
+
+void	ft_free_node(void *content, size_t size);
+void	ft_free_map(t_env *e);
 #endif

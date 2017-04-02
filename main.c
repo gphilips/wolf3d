@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 19:04:44 by gphilips          #+#    #+#             */
-/*   Updated: 2017/03/31 17:52:41 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/02 16:30:27 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ int			main(int argc, char **argv)
 	e = ft_init_all(e);
 	if (ft_read_file(fd, e) == -1)
 		return (ft_error(3) == -1 ? -1 : 0);
-	if (!(ft_create_int_tab(e->lst, e)))
+	if ((ft_create_int_tab(e->lst, e)) == -1)
 		return (ft_error(4) == -1 ? -1 : 0);
 	ft_create_win(e);
 	if ((close(fd)) == -1)
 		return (ft_error(2) == -1 ? -1 : 0);
-//	ft_free_map(e->file.map, e);
+	ft_free_map(e);
 	return (0);
 }
