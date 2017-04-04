@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 18:03:01 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/02 16:39:20 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/04 18:59:41 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,31 +53,29 @@ typedef struct	s_color
 
 typedef struct	s_cam
 {
-	double	cam_x;
-	double	ray_x;
-	double	ray_y;
-	double	raydir_x;
-	double	raydir_y;
-	double	side_dist_x;
-	double	side_dist_y;
-	double	delta_dist_x;
-	double	delta_dist_y;
-	double	perp_wall_dist;
-	int		step_x;
-	int		step_y;
-	double	time;
-	double	old_time;
-}				t_cam;
-
-typedef struct	s_pers
-{
 	double	x;
 	double	y;
 	double	dir_x;
 	double	dir_y;
+	double	cam_x;
+	double	ray_x;
+	double	ray_y;
 	double	plane_x;
 	double	plane_y;
-}				t_pers;
+	double	raydir_x;
+	double	raydir_y;
+	double	sdist_x;
+	double	sdist_y;
+	double	ddist_x;
+	double	ddist_y;
+	double	perp_wall;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	double	time;
+	double	old_time;
+}				t_cam;
 
 typedef struct	s_file
 {
@@ -103,7 +101,7 @@ typedef struct	s_env
 	int		ftl;
 	t_list	*lst;
 	t_file	file;
-	t_pers	pers;
+	t_cam	cam;
 	t_color	color;
 }				t_env;
 
@@ -112,7 +110,9 @@ int		ft_read_file(int fd, t_env *e);
 int		ft_create_int_tab(t_list *lst, t_env *e);
 void	ft_create_win(t_env *e);
 
+void	ft_raycast(t_env *e);
 void	ft_draw_map(t_env *e);
+void	ft_draw_wall(t_env *e, t_cam c);
 
 void	ft_free_node(void *content, size_t size);
 void	ft_free_map(t_env *e);

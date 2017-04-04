@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 18:04:28 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/02 16:27:15 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/04 18:49:34 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	ft_lst_push_back(t_list **list, char *line)
 {
-	while(*list != NULL)
+	while (*list != NULL)
 		list = &(*list)->next;
 	if (*list == NULL)
 		*list = ft_lstnew(line, ft_strlen(line) + 1);

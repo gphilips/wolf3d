@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:54:25 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/02 16:49:35 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/04 18:59:08 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void		ft_put_pixel(t_env *e, int x, int y, int color)
 	e->color.b = (color & 0xFF0000) >> 16;
 	e->color.g = (color & 0xFF00) >> 8;
 	e->color.r = (color & 0xFF);
-
 	if ((x > 0 && x < e->win_x) && (y > 0 && y < e->win_y))
 	{
 		i = (y * e->sizeline) + (x * e->bpp / 8);
@@ -47,3 +46,19 @@ void			ft_draw_map(t_env *e)
 		}
 	}
 }
+
+void			ft_draw_wall(t_env *e, t_cam c)
+{
+	int		line_h;
+	int		start;
+	int		end;
+
+	line_h = (int)(e->win_y / c.perp_wall);
+	start = -line_h / 2 + e->win_y / 2;
+	if (start < 0)
+		start = 0;
+	end = line_h / 2 + e->win_y / 2;
+	if (end >= e->win_y)
+		end = e->win_y - 1;
+}
+

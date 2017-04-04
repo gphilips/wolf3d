@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_win.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/04 18:48:36 by gphilips          #+#    #+#             */
+/*   Updated: 2017/04/04 18:49:16 by gphilips         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 /*
 static void	ft_instruction(t_env *e)
@@ -30,7 +42,7 @@ static void	ft_instruction(t_env *e)
 	mlx_string_put(e->mlx, e->win, 10, 150, 0x00FFFFFF, ftl);
 }
 */
-int		ft_expose_hook(t_env *e)
+int			ft_expose_hook(t_env *e)
 {
 	e->img = mlx_new_image(e->mlx, e->win_x, e->win_y);
 	e->data = mlx_get_data_addr(e->img, &e->bpp, &e->sizeline, &e->endian);
