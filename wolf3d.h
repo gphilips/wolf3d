@@ -51,12 +51,41 @@ typedef struct	s_color
 	int		b;
 }				t_color;
 
+typedef struct	s_cam
+{
+	double	cam_x;
+	double	ray_x;
+	double	ray_y;
+	double	raydir_x;
+	double	raydir_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	double	time;
+	double	old_time;
+}				t_cam;
+
+typedef struct	s_pers
+{
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+}				t_pers;
 
 typedef struct	s_file
 {
 	int		nb_x;
 	int		nb_y;
 	int		**map;
+	int		map_x;
+	int		map_y;
 	char	**split;
 }				t_file;
 
@@ -74,6 +103,7 @@ typedef struct	s_env
 	int		ftl;
 	t_list	*lst;
 	t_file	file;
+	t_pers	pers;
 	t_color	color;
 }				t_env;
 

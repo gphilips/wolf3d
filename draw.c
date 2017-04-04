@@ -12,16 +12,20 @@
 
 #include "wolf3d.h"
 
-static void		ft_put_pixel(t_env *e, int x, int y, int tmp)
+static void		ft_put_pixel(t_env *e, int x, int y, int color)
 {
 	int		i;
 
+	e->color.b = (color & 0xFF0000) >> 16;
+	e->color.g = (color & 0xFF00) >> 8;
+	e->color.r = (color & 0xFF);
+
 	if ((x > 0 && x < e->win_x) && (y > 0 && y < e->win_y))
 	{
-		i = (y * e->sizeline) + t (x * e->bpp / 8);
-		e->data[i] = e->color.b + tmp % 255;
-		e->data[i + 1] = e->color.g + tmp % 255;
-		e->data[i + 2] = e->color.r + tmp % 255;
+		i = (y * e->sizeline) + (x * e->bpp / 8);
+		e->data[i] = e->color.b;
+		e->data[i + 1] = e->color.g;
+		e->data[i + 2] = e->color.r;
 	}
 }
 

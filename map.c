@@ -34,7 +34,7 @@ int		ft_create_int_tab(t_list *lst, t_env *e)
 	y = -1;
 	while (++y < e->file.nb_y)
 	{
-		e->file.split = ft_strsplit((char*)lst->content, ',');
+		e->file.split = ft_strsplit((char*)lst->content, ' ');
 		e->file.map[y] = (int*)ft_memalloc(sizeof(int) * e->file.nb_x);
 		x = -1;
 		while (++x < e->file.nb_x)
