@@ -12,7 +12,7 @@
 
 #include "wolf3d.h"
 
-int		ft_check_num(t_env *e, int x, int y)
+int		check_num(t_env *e, int x, int y)
 {
 	t_file	f;
 
@@ -23,7 +23,7 @@ int		ft_check_num(t_env *e, int x, int y)
 	return (0);
 }
 
-int		ft_create_int_tab(t_list *lst, t_env *e)
+int		create_int_tab(t_list *lst, t_env *e)
 {
 	int		x;
 	int		y;
@@ -41,11 +41,11 @@ int		ft_create_int_tab(t_list *lst, t_env *e)
 		{
 			e->file.map[y][x] = ft_atoi(e->file.split[x]);
 			free(e->file.split[x]);
-			ft_check_num(e, x, y);
+			check_num(e, x, y);
 		}
 		lst = lst->next;
 	}
 	free(e->file.split);
-	ft_lstdel(start, ft_free_node);
+	ft_lstdel(start, free_node);
 	return (0);
 }

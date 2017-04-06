@@ -53,17 +53,17 @@ typedef struct	s_color
 
 typedef struct	s_cam
 {
-	double	x;
-	double	y;
+	double	pers_x;
+	double	pers_y;
 	double	dir_x;
 	double	dir_y;
 	double	cam_x;
 	double	ray_x;
 	double	ray_y;
-	double	plane_x;
-	double	plane_y;
 	double	raydir_x;
 	double	raydir_y;
+	double	plane_x;
+	double	plane_y;
 	double	sdist_x;
 	double	sdist_y;
 	double	ddist_x;
@@ -73,6 +73,10 @@ typedef struct	s_cam
 	int		step_y;
 	int		hit;
 	int		side;
+	int		line_h;
+	int		start;
+	int		end;
+	float	speed;
 	double	time;
 	double	old_time;
 }				t_cam;
@@ -105,15 +109,17 @@ typedef struct	s_env
 	t_color	color;
 }				t_env;
 
-t_env	*ft_init_all(t_env *e);
-int		ft_read_file(int fd, t_env *e);
-int		ft_create_int_tab(t_list *lst, t_env *e);
-void	ft_create_win(t_env *e);
+t_env	*init_all(t_env *e);
+int		read_file(int fd, t_env *e);
+int		create_int_tab(t_list *lst, t_env *e);
 
-void	ft_raycast(t_env *e);
-void	ft_draw_map(t_env *e);
-void	ft_draw_wall(t_env *e, t_cam c);
+void	raycast(t_env *e);
+void	calc_height_wall(t_env *e);
+void	draw_wall(t_env *e, int x);
+void	draw_floor(t_env *e, int x);
 
-void	ft_free_node(void *content, size_t size);
-void	ft_free_map(t_env *e);
+void	create_win(t_env *e);
+void	move(t_env *e, int keycode);
+void	free_node(void *content, size_t size);
+void	free_map(t_env *e);
 #endif

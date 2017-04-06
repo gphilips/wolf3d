@@ -12,14 +12,14 @@
 
 #include "wolf3d.h"
 
-static void		ft_put_pixel(t_env *e, int x, int y, int color)
+static void		put_pixel(t_env *e, int x, int y)
 {
 	int		i;
 
-	e->color.b = (color & 0xFF0000) >> 16;
+/*	e->color.b = (color & 0xFF0000) >> 16;
 	e->color.g = (color & 0xFF00) >> 8;
 	e->color.r = (color & 0xFF);
-	if ((x > 0 && x < e->win_x) && (y > 0 && y < e->win_y))
+*/	if ((x > 0 && x < e->win_x) && (y > 0 && y < e->win_y))
 	{
 		i = (y * e->sizeline) + (x * e->bpp / 8);
 		e->data[i] = e->color.b;
@@ -28,37 +28,58 @@ static void		ft_put_pixel(t_env *e, int x, int y, int color)
 	}
 }
 
-void			ft_draw_map(t_env *e)
+static void		change_color(t_env *e, int r, int g, int b)
+{
+	e->color.r = r;
+	e->color.g = g;
+	e->color.b = b;
+}
+
+void			calc_height_wall(t_env *e)
+{
+	e->cam.line_h = (int)(e->win_y / e->cam.perp_wall);
+	e->cam.start = -e->cam.line_h / 2 + e->win_y / 2;
+	e->cam.end = e->cam.line_h / 2 + e->win_y / 2;
+	if (e->cam.start < 0)
+		e->cam.start = 0;
+	if (e->cam.end >= e->win_y)
+		e->cam.end = e->win_y - 1;
+}
+
+void			draw_wall(t_env *e, int x)
 {
 	int		y;
-	int		x;
 
-	y = -1;
-	while (++y < e->file.nb_y)
+	y = e->cam.start;
+	while (y < e->cam.end)
 	{
-		x = -1;
-		while (++x < e->file.nb_x)
-		{
-			if (e->file.map[y][x] == 1)
-				ft_put_pixel(e, x, y, 20);
-			else if (e->file.map[y][x] == 0)
-				ft_put_pixel(e, x, y, 200);
-		}
+		if (e->cam.side == 1)
+			change_color(e, 200, 200, 200);
+		else
+			change_color(e, 255, 255, 255);
+		put_pixel(e, x, y);	
+		y++;
 	}
 }
 
-void			ft_draw_wall(t_env *e, t_cam c)
+void			draw_floor(t_env *e, int x)
 {
-	int		line_h;
-	int		start;
-	int		end;
+	int		y;
 
-	line_h = (int)(e->win_y / c.perp_wall);
-	start = -line_h / 2 + e->win_y / 2;
-	if (start < 0)
-		start = 0;
-	end = line_h / 2 + e->win_y / 2;
-	if (end >= e->win_y)
-		end = e->win_y - 1;
+	if (e->cam.end < 0)
+		e->cam.end = e->win_y;
+	y = e->cam.end;
+	change_color(e, 100, 100, 100);
+	while (y < e->win_y)
+	{
+		put_pixel(e, x, y);
+		y++;
+	}
+	y = e->cam.end;
+	change_color(e, 143, 212, 255);
+	while (y < e->win_y)
+	{
+		put_pixel(e, x, e->win_y - y - 1);
+		y++;
+	}
 }
-

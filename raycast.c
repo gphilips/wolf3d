@@ -12,81 +12,96 @@
 
 #include "wolf3d.h"
 
-static void		ft_calc_ray(t_env *e, t_file f, t_cam c, int x)
+static void		set_ray(t_env *e, int x)
 {
-	c.cam_x = 2 * x / (double)e->win_x - 1;
-	c.ray_x = c.x;
-	c.ray_y = c.y;
-	c.raydir_x = c.dir_x + c.plane_x * c.cam_x;
-	c.raydir_y = c.dir_y + c.plane_y * c.cam_x;
-	f.map_x = (int)c.ray_x;
-	f.map_x = (int)c.ray_y;
-	c.ddist_x = sqrt((c.raydir_y * c.raydir_y) + 1 / (c.raydir_x * c.raydir_x));
-	c.ddist_y = sqrt((c.raydir_x * c.raydir_x) + 1 / (c.raydir_y * c.raydir_y));
+	e->cam.cam_x = (2 * x / (double)(e->win_x)) - 1;
+	e->cam.ray_x = e->cam.pers_x;
+	e->cam.ray_y = e->cam.pers_y;
+	e->cam.raydir_x = e->cam.dir_x + e->cam.plane_x * e->cam.cam_x;
+	e->cam.raydir_y = e->cam.dir_y + e->cam.plane_y * e->cam.cam_x;
+	e->file.map_x = (int)(e->cam.ray_x);
+	e->file.map_y = (int)(e->cam.ray_y);
+	e->cam.ddist_x = sqrt(1 + (e->cam.raydir_y * e->cam.raydir_y) / (e->cam.raydir_x * e->cam.raydir_x));
+	e->cam.ddist_y = sqrt(1 + (e->cam.raydir_x * e->cam.raydir_x) / (e->cam.raydir_y * e->cam.raydir_y));
+	e->cam.hit = 0;
 }
 
-static void		ft_calc_side_dist(t_file f, t_cam c)
+static void		step_to_wall(t_env *e)
 {
-	if (c.raydir_x < 0)
+	if (e->cam.raydir_x < 0)
 	{
-		c.step_x = -1;
-		c.sdist_x = (c.ray_x - f.map_x) * c.ddist_x;
+		e->cam.step_x = -1;
+		e->cam.sdist_x = (e->cam.ray_x - e->file.map_x) * e->cam.ddist_x;
 	}
 	else
 	{
-		c.step_x = 1;
-		c.sdist_x = (f.map_x + 1 - c.ray_x) * c.ddist_x;
+		e->cam.step_x = 1;
+		e->cam.sdist_x = (e->file.map_x + 1.0 - e->cam.ray_x) * e->cam.ddist_x;
 	}
-	if (c.raydir_y < 0)
+	if (e->cam.raydir_y < 0)
 	{
-		c.step_y = -1;
-		c.sdist_y = (c.ray_y - f.map_y) * c.ddist_y;
+		e->cam.step_y = -1;
+		e->cam.sdist_y = (e->cam.ray_y -e->file.map_y) * e->cam.ddist_y;
 	}
 	else
 	{
-		c.step_y = 1;
-		c.sdist_y = (f.map_y + 1 - c.ray_x) * c.ddist_y;
+		e->cam.step_y = 1;
+		e->cam.sdist_y = (e->file.map_y + 1.0 - e->cam.ray_y) * e->cam.ddist_y;
 	}
 }
 
-static void		ft_hit_wall(t_file f, t_cam c)
+static void		hit_wall(t_env *e)
 {
-	while (c.hit == 0)
+	while (e->cam.hit == 0)
 	{
-		if (c.sdist_x < c.sdist_y)
+		if (e->cam.sdist_x < e->cam.sdist_y)
 		{
-			c.sdist_x += c.ddist_x;
-			f.map_x += c.step_x;
-			c.side = 0;
+			e->cam.sdist_x += e->cam.ddist_x;
+			e->file.map_x += e->cam.step_x;
+			e->cam.side = 0;
 		}
 		else
 		{
-			c.sdist_y += c.ddist_y;
-			f.map_y += c.step_y;
-			c.side = 1;
+			e->cam.sdist_y += e->cam.ddist_y;
+			e->file.map_y += e->cam.step_y;
+			e->cam.side = 1;
 		}
-		if (f.map[f.map_y][f.map_x] > 0)
-			c.hit = 1;
+		if (e->file.map[e->file.map_x][e->file.map_y] > 0)
+			e->cam.hit = 1;
 	}
 }
 
-static void		ft_dist_wall(t_file f, t_cam c)
+static void		correct_dist(t_env *e)
 {
-	if (c.side == 0)
-		c.perp_wall = (f.map_x - c.ray_x + (1 - c.step_x) / 2) / c.raydir_x;
-	else
-		c.perp_wall = (f.map_y - c.ray_y + (1 - c.step_y) / 2) / c.raydir_y;
+	double	sqr_crossed_x;
+	double	sqr_crossed_y;
+	
+	if (e->cam.side == 0)
+	{
+		sqr_crossed_x = e->file.map_x - e->cam.ray_x + (1 - e->cam.step_x) / 2;
+		e->cam.perp_wall = sqr_crossed_x / e->cam.raydir_x;
+	}
+	else if (e->cam.side == 1)
+	{
+		sqr_crossed_y = e->file.map_y - e->cam.ray_y + (1 - e->cam.step_y) / 2;
+		e->cam.perp_wall = sqr_crossed_y / e->cam.raydir_y;
+	}
 }
 
-void			ft_raycast(t_env *e)
+void			raycast(t_env *e)
 {
 	int		x;
 
-	x = -1;
-	while (++x < e->win_x)
+	x = 0;
+	while (x < e->win_x)
 	{
-		ft_calc_ray(e, e->file, e->cam, x);
-		ft_calc_side_dist(e->file, e->cam);
-		ft_hit_wall(e->file, e->cam);
+		set_ray(e, x);
+		step_to_wall(e);
+		hit_wall(e);
+		correct_dist(e);
+		calc_height_wall(e);
+		draw_wall(e, x);
+		draw_floor(e, x);
+		x++;
 	}
 }

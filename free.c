@@ -12,14 +12,14 @@
 
 #include "wolf3d.h"
 
-void	ft_free_node(void *content, size_t size)
+void	free_node(void *content, size_t size)
 {
 	free(content);
 	content = NULL;
 	size = 0;
 }
 
-void	ft_free_map(t_env *e)
+void	free_map(t_env *e)
 {
 	int		y;
 

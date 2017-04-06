@@ -12,7 +12,7 @@
 
 #include "wolf3d.h"
 /*
-static void	ft_instruction(t_env *e)
+static void	instruction(t_env *e)
 {
 	char	*line;
 	char	*zoom_in;
@@ -42,35 +42,37 @@ static void	ft_instruction(t_env *e)
 	mlx_string_put(e->mlx, e->win, 10, 150, 0x00FFFFFF, ftl);
 }
 */
-int			ft_expose_hook(t_env *e)
+int			expose_hook(t_env *e)
 {
 	e->img = mlx_new_image(e->mlx, e->win_x, e->win_y);
 	e->data = mlx_get_data_addr(e->img, &e->bpp, &e->sizeline, &e->endian);
-	ft_create_int_tab(e->lst, e);
-	ft_draw_map(e);
+	raycast(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
-//	ft_instruction(e);
+//	instruction(e);
 	mlx_destroy_image(e->mlx, e->img);
 	return (0);
 }
 
-static int	ft_key_hook(int keycode)
+static int	key_hook(int keycode)
 {
 	ft_putstr("key : ");
 	ft_putnbr(keycode);
 	ft_putchar('\n');
 	if (keycode == ESC)
 		exit(0);
-//	ft_expose_hook(e);
-	return (0);
+/*	if (keycode == UP || keycode == DOWN
+		|| keycode == LEFT || keycode == RIGHT)
+		move(e, keycode);
+	expose_hook(e);
+*/	return (0);
 }
 
-void		ft_create_win(t_env *e)
+void		create_win(t_env *e)
 {
 	if (!(e->mlx = mlx_init()))
 		ft_putendl_fd("Error minilibx init", 2);
-	e->win = mlx_new_window(e->mlx, e->win_x, e->win_y, "Wold3D");
-	mlx_hook(e->win, KEYPRESS, KEYPRESSMASK, ft_key_hook, e);
-	mlx_expose_hook(e->win, ft_expose_hook, e);
+	e->win = mlx_new_window(e->mlx, e->win_x, e->win_y, "Wolf 3D");
+	mlx_hook(e->win, KEYPRESS, KEYPRESSMASK, key_hook, e);
+	mlx_expose_hook(e->win, expose_hook, e);
 	mlx_loop(e->mlx);
 }

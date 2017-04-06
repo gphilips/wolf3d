@@ -12,7 +12,7 @@
 
 #include "wolf3d.h"
 
-static int	ft_error(int n)
+static int	error(int n)
 {
 	if (n == 1)
 		ft_putendl_fd("usage: ./wold3d <map>", 2);
@@ -32,17 +32,17 @@ int			main(int argc, char **argv)
 
 	e = (t_env*)ft_memalloc(sizeof(t_env));
 	if (argc != 2)
-		return (ft_error(1) == -1 ? -1 : 0);
+		return (error(1) == -1 ? -1 : 0);
 	if ((fd = open(argv[1], O_RDONLY)) < 0)
-		return (ft_error(2) == -1 ? -1 : 0);
-	e = ft_init_all(e);
-	if (ft_read_file(fd, e) == -1)
-		return (ft_error(3) == -1 ? -1 : 0);
-	if ((ft_create_int_tab(e->lst, e)) == -1)
-		return (ft_error(4) == -1 ? -1 : 0);
-	ft_create_win(e);
+		return (error(2) == -1 ? -1 : 0);
+	e = init_all(e);
+	if (read_file(fd, e) == -1)
+		return (error(3) == -1 ? -1 : 0);
+	if ((create_int_tab(e->lst, e)) == -1)
+		return (error(4) == -1 ? -1 : 0);
+	create_win(e);
 	if ((close(fd)) == -1)
-		return (ft_error(2) == -1 ? -1 : 0);
-	ft_free_map(e);
+		return (error(2) == -1 ? -1 : 0);
+	free_map(e);
 	return (0);
 }

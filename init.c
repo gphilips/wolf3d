@@ -12,19 +12,27 @@
 
 #include "wolf3d.h"
 
-static void		ft_init_cam(t_env *e)
+static void		init_color(t_env *e)
 {
-	e->cam.x = 4;
-	e->cam.y = 4;
+	e->color.r = 0;
+	e->color.g = 0;
+	e->color.b = 0;
+}
+
+static void		init_cam(t_env *e)
+{
+	e->cam.pers_x = 4;
+	e->cam.pers_y = 4;
 	e->cam.dir_x = -1;
 	e->cam.dir_y = 0;
 	e->cam.plane_x = 0;
 	e->cam.plane_y = 0.66;
+	e->cam.speed = 0.2;
 	e->cam.time = 0;
 	e->cam.old_time = 0;
 }
 
-static void		ft_init_file(t_env *e)
+static void		init_file(t_env *e)
 {
 	e->file.nb_x = 0;
 	e->file.nb_y = 0;
@@ -34,15 +42,16 @@ static void		ft_init_file(t_env *e)
 	e->file.map_y = 0;
 }
 
-t_env			*ft_init_all(t_env *e)
+t_env			*init_all(t_env *e)
 {
 	e->mlx = NULL;
 	e->win = NULL;
-	e->win_x = 1000;
-	e->win_y = 700;
+	e->win_x = 800;
+	e->win_y = 500;
 	e->img = NULL;
 	e->data = NULL;
-	ft_init_file(e);
-	ft_init_cam(e);
+	init_file(e);
+	init_cam(e);
+	init_color(e);
 	return (e);
 }

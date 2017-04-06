@@ -20,7 +20,7 @@ static void	ft_lst_push_back(t_list **list, char *line)
 		*list = ft_lstnew(line, ft_strlen(line) + 1);
 }
 
-static int	ft_get_size(t_env *e)
+static int	get_size(t_env *e)
 {
 	t_list	*tmp;
 	int		flag;
@@ -48,7 +48,7 @@ static int	ft_get_size(t_env *e)
 	return (0);
 }
 
-int			ft_read_file(int fd, t_env *e)
+int			read_file(int fd, t_env *e)
 {
 	char	*line;
 
@@ -65,5 +65,5 @@ int			ft_read_file(int fd, t_env *e)
 		e->file.nb_y++;
 		free(line);
 	}
-	return ((ft_get_size(e) == -1 ? -1 : 0));
+	return ((get_size(e) == -1 ? -1 : 0));
 }
