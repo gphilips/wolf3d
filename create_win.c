@@ -42,6 +42,7 @@ static void	instruction(t_env *e)
 	mlx_string_put(e->mlx, e->win, 10, 150, 0x00FFFFFF, ftl);
 }
 */
+
 int			expose_hook(t_env *e)
 {
 	e->img = mlx_new_image(e->mlx, e->win_x, e->win_y);
@@ -53,18 +54,28 @@ int			expose_hook(t_env *e)
 	return (0);
 }
 
-static int	key_hook(int keycode)
+static int	mouse_hook(int button)
 {
-	ft_putstr("key : ");
 	ft_putnbr(keycode);
 	ft_putchar('\n');
-	if (keycode == ESC)
+}
+
+static int	key_hook(int keycode, t_env *e)
+{
+/*	ft_putstr("key : ");
+	ft_putnbr(keycode);
+	ft_putchar('\n');
+*/	if (keycode == ESC || keycode == 7)
+	{
+		mlx_destroy_window(e->mlx, e->win);
 		exit(0);
-/*	if (keycode == UP || keycode == DOWN
-		|| keycode == LEFT || keycode == RIGHT)
+	}
+	else if (keycode == UP || keycode == DOWN
+			|| keycode == LEFT || keycode == RIGHT
+			|| keycode == A_LEFT || keycode == D_RIGHT)
 		move(e, keycode);
 	expose_hook(e);
-*/	return (0);
+	return (0);
 }
 
 void		create_win(t_env *e)
@@ -73,6 +84,7 @@ void		create_win(t_env *e)
 		ft_putendl_fd("Error minilibx init", 2);
 	e->win = mlx_new_window(e->mlx, e->win_x, e->win_y, "Wolf 3D");
 	mlx_hook(e->win, KEYPRESS, KEYPRESSMASK, key_hook, e);
+	mlx_mouse_hook(e->win, mouse_hook, e);
 	mlx_expose_hook(e->win, expose_hook, e);
 	mlx_loop(e->mlx);
 }

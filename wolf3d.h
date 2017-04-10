@@ -34,6 +34,8 @@
 # define CLICK_R 2
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
+# define A_LEFT 12
+# define D_RIGHT 2
 # define R 15
 # define G 5
 # define B 11
@@ -77,8 +79,7 @@ typedef struct	s_cam
 	int		start;
 	int		end;
 	float	speed;
-	double	time;
-	double	old_time;
+	float	rot_speed;
 }				t_cam;
 
 typedef struct	s_file
@@ -116,10 +117,11 @@ int		create_int_tab(t_list *lst, t_env *e);
 void	raycast(t_env *e);
 void	calc_height_wall(t_env *e);
 void	draw_wall(t_env *e, int x);
-void	draw_floor(t_env *e, int x);
+void	draw_sky_floor(t_env *e, int x);
 
 void	create_win(t_env *e);
-void	move(t_env *e, int keycode);
+int		move(t_env *e, int keycode);
+
 void	free_node(void *content, size_t size);
 void	free_map(t_env *e);
 #endif

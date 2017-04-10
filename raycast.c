@@ -54,7 +54,8 @@ static void		hit_wall(t_env *e)
 {
 	while (e->cam.hit == 0)
 	{
-		if (e->cam.sdist_x < e->cam.sdist_y)
+		if (e->cam.sdist_x < e->cam.sdist_y
+			&& (e->cam.sdist_x >= 0 || e->cam.sdist_y <= 0))
 		{
 			e->cam.sdist_x += e->cam.ddist_x;
 			e->file.map_x += e->cam.step_x;
@@ -66,7 +67,7 @@ static void		hit_wall(t_env *e)
 			e->file.map_y += e->cam.step_y;
 			e->cam.side = 1;
 		}
-		if (e->file.map[e->file.map_x][e->file.map_y] > 0)
+		if (e->file.map[e->file.map_x][e->file.map_y] != 0)
 			e->cam.hit = 1;
 	}
 }
@@ -92,8 +93,8 @@ void			raycast(t_env *e)
 {
 	int		x;
 
-	x = 0;
-	while (x < e->win_x)
+	x = -1;
+	while (++x < e->win_x)
 	{
 		set_ray(e, x);
 		step_to_wall(e);
@@ -101,7 +102,6 @@ void			raycast(t_env *e)
 		correct_dist(e);
 		calc_height_wall(e);
 		draw_wall(e, x);
-		draw_floor(e, x);
-		x++;
+		draw_sky_floor(e, x);
 	}
 }

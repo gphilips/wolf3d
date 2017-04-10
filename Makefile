@@ -12,7 +12,7 @@
 
 NAME = wolf3d
 
-SRC = init.c read_file.c map.c draw.c raycast.c events.c create_win.c free.c \
+SRC = init.c read_file.c map.c draw.c raycast.c move.c create_win.c free.c \
 	main.c
 CFLAGS = -Wall -Werror -Wextra
 MLX = -lmlx -framework OpenGL -framework AppKit

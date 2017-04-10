@@ -41,7 +41,7 @@ static int	get_size(t_env *e)
 			e->file.nb_x = i;
 		}
 		tmp_x = i;
-		if (e->file.nb_x != tmp_x)
+		if (e->file.nb_x != tmp_x || i < 3 || e->file.nb_y < 3)
 			return (-1);
 		tmp = tmp->next;
 	}

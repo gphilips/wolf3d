@@ -21,15 +21,14 @@ static void		init_color(t_env *e)
 
 static void		init_cam(t_env *e)
 {
-	e->cam.pers_x = 4;
-	e->cam.pers_y = 4;
-	e->cam.dir_x = -1;
+	e->cam.pers_x = 3;
+	e->cam.pers_y = 3;
+	e->cam.dir_x = 1;
 	e->cam.dir_y = 0;
 	e->cam.plane_x = 0;
 	e->cam.plane_y = 0.66;
 	e->cam.speed = 0.2;
-	e->cam.time = 0;
-	e->cam.old_time = 0;
+	e->cam.rot_speed = 0.1;
 }
 
 static void		init_file(t_env *e)

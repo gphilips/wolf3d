@@ -16,10 +16,7 @@ static void		put_pixel(t_env *e, int x, int y)
 {
 	int		i;
 
-/*	e->color.b = (color & 0xFF0000) >> 16;
-	e->color.g = (color & 0xFF00) >> 8;
-	e->color.r = (color & 0xFF);
-*/	if ((x > 0 && x < e->win_x) && (y > 0 && y < e->win_y))
+	if ((x > 0 && x < e->win_x) && (y > 0 && y < e->win_y))
 	{
 		i = (y * e->sizeline) + (x * e->bpp / 8);
 		e->data[i] = e->color.b;
@@ -62,7 +59,7 @@ void			draw_wall(t_env *e, int x)
 	}
 }
 
-void			draw_floor(t_env *e, int x)
+void			draw_sky_floor(t_env *e, int x)
 {
 	int		y;
 
