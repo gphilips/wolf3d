@@ -43,38 +43,62 @@ static void	instruction(t_env *e)
 }
 */
 
+static int 	quit(t_env *e)
+{
+	mlx_destroy_window(e->mlx, e->win);
+	exit(0);
+	return (0);
+}
+
 int			expose_hook(t_env *e)
 {
 	e->img = mlx_new_image(e->mlx, e->win_x, e->win_y);
 	e->data = mlx_get_data_addr(e->img, &e->bpp, &e->sizeline, &e->endian);
 	raycast(e);
+	move(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 //	instruction(e);
 	mlx_destroy_image(e->mlx, e->img);
 	return (0);
 }
 
-static int	mouse_hook(int button)
-{
-	ft_putnbr(keycode);
-	ft_putchar('\n');
-}
-
-static int	key_hook(int keycode, t_env *e)
+static int	key_press(int keycode, t_env *e)
 {
 /*	ft_putstr("key : ");
 	ft_putnbr(keycode);
 	ft_putchar('\n');
 */	if (keycode == ESC || keycode == 7)
-	{
-		mlx_destroy_window(e->mlx, e->win);
-		exit(0);
-	}
-	else if (keycode == UP || keycode == DOWN
-			|| keycode == LEFT || keycode == RIGHT
-			|| keycode == A_LEFT || keycode == D_RIGHT)
-		move(e, keycode);
+		quit(e);
+	else if (keycode == UP)
+		e->move.up = 1;
+	else if (keycode == DOWN)
+		e->move.down = 1;
+	else if (keycode == LEFT)
+		e->move.left = 1;
+	else if (keycode == RIGHT)
+		e->move.right = 1;
+	else if (keycode == Q_LEFT)
+		e->move.s_left = 1;
+	else if (keycode == E_RIGHT)
+		e->move.s_right = 1;
 	expose_hook(e);
+	return (0);
+}
+
+static int	key_release(int keycode, t_env *e)
+{
+	if (keycode == UP)
+		e->move.up = 0;
+	else if (keycode == DOWN)
+		e->move.down = 0;
+	else if (keycode == LEFT)
+		e->move.left = 0;
+	else if (keycode == RIGHT)
+		e->move.right = 0;
+	else if (keycode == Q_LEFT)
+		e->move.s_left = 0;
+	else if (keycode == E_RIGHT)
+		e->move.s_right = 0;
 	return (0);
 }
 
@@ -83,8 +107,10 @@ void		create_win(t_env *e)
 	if (!(e->mlx = mlx_init()))
 		ft_putendl_fd("Error minilibx init", 2);
 	e->win = mlx_new_window(e->mlx, e->win_x, e->win_y, "Wolf 3D");
-	mlx_hook(e->win, KEYPRESS, KEYPRESSMASK, key_hook, e);
-	mlx_mouse_hook(e->win, mouse_hook, e);
+	mlx_hook(e->win, CLOSE, CLOSEMASK, quit, e);
+	mlx_hook(e->win, KEYPRESS, KEYPRESSMASK, key_press, e);
+	mlx_hook(e->win, KEYRELEASE, KEYRELEASEMASK, key_release, e);
+//	mlx_mouse_hook(e->win, mouse_hook, e);
 	mlx_expose_hook(e->win, expose_hook, e);
 	mlx_loop(e->mlx);
 }

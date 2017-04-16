@@ -45,8 +45,8 @@ t_env			*init_all(t_env *e)
 {
 	e->mlx = NULL;
 	e->win = NULL;
-	e->win_x = 800;
-	e->win_y = 500;
+	e->win_x = 1300;
+	e->win_y = 800;
 	e->img = NULL;
 	e->data = NULL;
 	init_file(e);

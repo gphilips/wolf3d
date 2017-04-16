@@ -34,17 +34,30 @@
 # define CLICK_R 2
 # define SCROLL_UP 4
 # define SCROLL_DOWN 5
-# define A_LEFT 12
-# define D_RIGHT 2
+# define Q_LEFT 12
+# define E_RIGHT 14
 # define R 15
 # define G 5
 # define B 11
 # define TAB 48
 # define KEYPRESS 2
 # define KEYPRESSMASK (1L<<2)
+# define KEYRELEASE 3
+# define KEYRELEASEMASK (1L<<1)
+# define CLOSE 17
+# define CLOSEMASK (1L<<17)
 # define MOTIONNOTIFY 6
 # define POINTERMOTIONMASK (1L<<6)
 
+typedef struct	s_move
+{
+	int		up;
+	int		down;
+	int		left;
+	int		right;
+	int		s_left;
+	int		s_right;
+}				t_move;
 
 typedef struct	s_color
 {
@@ -108,6 +121,7 @@ typedef struct	s_env
 	t_file	file;
 	t_cam	cam;
 	t_color	color;
+	t_move	move;
 }				t_env;
 
 t_env	*init_all(t_env *e);
@@ -119,8 +133,8 @@ void	calc_height_wall(t_env *e);
 void	draw_wall(t_env *e, int x);
 void	draw_sky_floor(t_env *e, int x);
 
+int		move(t_env *e);
 void	create_win(t_env *e);
-int		move(t_env *e, int keycode);
 
 void	free_node(void *content, size_t size);
 void	free_map(t_env *e);

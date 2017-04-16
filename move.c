@@ -1,11 +1,11 @@
 #include "wolf3d.h"
 
-static void		move_forward(t_env *e, int keycode)
+static void		move_front_back(t_env *e)
 {
 	int		y;
 	int		x;
 	
-	if (keycode == UP)
+	if (e->move.up == 1)
 	{
 		y = (int)(e->cam.pers_x - e->cam.dir_x * e->cam.speed);
 		x = (int)(e->cam.pers_x);
@@ -15,7 +15,7 @@ static void		move_forward(t_env *e, int keycode)
 		if (e->file.map[y][x] == 0)
 			e->cam.pers_y += e->cam.dir_y * e->cam.speed;
 	}
-	else if (keycode == DOWN)
+	else if (e->move.down == 1)
 	{
 		y = (int)(e->cam.pers_x - e->cam.dir_x * e->cam.speed);
 		x = (int)(e->cam.pers_x);
@@ -27,12 +27,12 @@ static void		move_forward(t_env *e, int keycode)
 	}
 }
 
-static void		move_side(t_env *e, int keycode)
+static void		move_side(t_env *e)
 {
 	int		y;
 	int		x;
 
-	if (keycode == A_LEFT)
+	if (e->move.s_left == 1)
 	{
 		y = (int)(e->cam.pers_x - e->cam.plane_x * e->cam.speed);
 		x = (int)(e->cam.pers_x);
@@ -42,7 +42,7 @@ static void		move_side(t_env *e, int keycode)
 		if (e->file.map[y][x] == 0)
 			e->cam.pers_y -= e->cam.plane_y * e->cam.speed;
 	}
-	else if (keycode == D_RIGHT)
+	else if (e->move.s_right == 1)
 	{
 		y = (int)(e->cam.pers_x - e->cam.plane_x * e->cam.speed);
 		x = (int)(e->cam.pers_x);
@@ -54,12 +54,12 @@ static void		move_side(t_env *e, int keycode)
 	}
 }
 
-static void		move_turn(t_env *e, int keycode)
+static void		move_turn(t_env *e)
 {
 	double	olddir_x;
 	double	oldplane_x;
 
-	if (keycode == RIGHT)
+	if (e->move.right == 1)
 	{
 		olddir_x = e->cam.dir_x;
 		e->cam.dir_x = e->cam.dir_x * cos(e->cam.rot_speed) - e->cam.dir_y * sin(e->cam.rot_speed);
@@ -68,7 +68,7 @@ static void		move_turn(t_env *e, int keycode)
 		e->cam.plane_x = e->cam.plane_x * cos(e->cam.rot_speed) - e->cam.plane_y * sin(e->cam.rot_speed);
 		e->cam.plane_y = oldplane_x * sin(e->cam.rot_speed) + e->cam.plane_y * cos(e->cam.rot_speed);
 	}
-	if (keycode == LEFT)
+	if (e->move.left == 1)
 	{
 		olddir_x = e->cam.dir_x;
 		e->cam.dir_x = e->cam.dir_x * cos(-e->cam.rot_speed) - e->cam.dir_y * sin(-e->cam.rot_speed);
@@ -79,13 +79,10 @@ static void		move_turn(t_env *e, int keycode)
 	}
 }
 
-int			move(t_env *e, int keycode)
+int			move(t_env *e)
 {
-	if (keycode == UP || keycode == DOWN)
-		move_forward(e, keycode);
-	else if (keycode == A_LEFT || keycode == D_RIGHT)
-		move_side(e, keycode);
-	if (keycode == LEFT || keycode == RIGHT)
-		move_turn(e, keycode);
+	move_front_back(e);
+	move_side(e);
+	move_turn(e);
 	return (0);
 }

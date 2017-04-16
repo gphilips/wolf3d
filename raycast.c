@@ -41,7 +41,7 @@ static void		step_to_wall(t_env *e)
 	if (e->cam.raydir_y < 0)
 	{
 		e->cam.step_y = -1;
-		e->cam.sdist_y = (e->cam.ray_y -e->file.map_y) * e->cam.ddist_y;
+		e->cam.sdist_y = (e->cam.ray_y - e->file.map_y) * e->cam.ddist_y;
 	}
 	else
 	{
@@ -54,8 +54,7 @@ static void		hit_wall(t_env *e)
 {
 	while (e->cam.hit == 0)
 	{
-		if (e->cam.sdist_x < e->cam.sdist_y
-			&& (e->cam.sdist_x >= 0 || e->cam.sdist_y <= 0))
+		if (e->cam.sdist_x < e->cam.sdist_y)
 		{
 			e->cam.sdist_x += e->cam.ddist_x;
 			e->file.map_x += e->cam.step_x;
@@ -67,7 +66,7 @@ static void		hit_wall(t_env *e)
 			e->file.map_y += e->cam.step_y;
 			e->cam.side = 1;
 		}
-		if (e->file.map[e->file.map_x][e->file.map_y] != 0)
+		if (e->file.map[e->file.map_x][e->file.map_y] > 0)
 			e->cam.hit = 1;
 	}
 }
