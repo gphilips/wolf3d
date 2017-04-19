@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 18:48:36 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/04 18:49:16 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/19 18:49:36 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int			expose_hook(t_env *e)
 {
 	e->img = mlx_new_image(e->mlx, e->win_x, e->win_y);
 	e->data = mlx_get_data_addr(e->img, &e->bpp, &e->sizeline, &e->endian);
+	draw_minimap(e);
 	raycast(e);
 	move(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);

@@ -6,13 +6,13 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:54:25 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/04 18:59:08 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/19 17:40:37 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-static void		put_pixel(t_env *e, int x, int y)
+void	put_pixel(t_env *e, int x, int y)
 {
 	int		i;
 
@@ -25,14 +25,14 @@ static void		put_pixel(t_env *e, int x, int y)
 	}
 }
 
-static void		change_color(t_env *e, int r, int g, int b)
+void	change_color(t_env *e, int r, int g, int b)
 {
 	e->color.r = r;
 	e->color.g = g;
 	e->color.b = b;
 }
 
-void			calc_height_wall(t_env *e)
+void	calc_height_wall(t_env *e)
 {
 	e->cam.line_h = (int)(e->win_y / e->cam.perp_wall);
 	e->cam.start = -e->cam.line_h / 2 + e->win_y / 2;
@@ -43,7 +43,7 @@ void			calc_height_wall(t_env *e)
 		e->cam.end = e->win_y - 1;
 }
 
-void			draw_wall(t_env *e, int x)
+void	draw_wall(t_env *e, int x)
 {
 	int		y;
 
@@ -54,12 +54,12 @@ void			draw_wall(t_env *e, int x)
 			change_color(e, 200, 200, 200);
 		else
 			change_color(e, 255, 255, 255);
-		put_pixel(e, x, y);	
+		put_pixel(e, x, y);
 		y++;
 	}
 }
 
-void			draw_sky_floor(t_env *e, int x)
+void	draw_sky_floor(t_env *e, int x)
 {
 	int		y;
 

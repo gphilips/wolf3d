@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 17:03:38 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/04 18:49:58 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/19 17:43:12 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void		correct_dist(t_env *e)
 {
 	double	sqr_crossed_x;
 	double	sqr_crossed_y;
-	
+
 	if (e->cam.side == 0)
 	{
 		sqr_crossed_x = e->file.map_x - e->cam.ray_x + (1 - e->cam.step_x) / 2;
@@ -100,7 +100,7 @@ void			raycast(t_env *e)
 		hit_wall(e);
 		correct_dist(e);
 		calc_height_wall(e);
-		draw_wall(e, x);
-		draw_sky_floor(e, x);
+//		draw_wall(e, x);
+//		draw_sky_floor(e, x);
 	}
 }

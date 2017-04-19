@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 18:03:01 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/04 18:59:41 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/19 17:42:10 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,11 +129,14 @@ int		read_file(int fd, t_env *e);
 int		create_int_tab(t_list *lst, t_env *e);
 
 void	raycast(t_env *e);
+void	change_color(t_env *e, int r, int g, int b);
+void	put_pixel(t_env *e, int x, int y);
 void	calc_height_wall(t_env *e);
 void	draw_wall(t_env *e, int x);
 void	draw_sky_floor(t_env *e, int x);
 
 int		move(t_env *e);
+void	draw_minimap(t_env *e);
 void	create_win(t_env *e);
 
 void	free_node(void *content, size_t size);
