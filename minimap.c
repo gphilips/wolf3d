@@ -12,30 +12,46 @@
 
 #include "wolf3d.h"
 
-void	draw_minimap(t_env *e)
+static void		draw_tile(t_env *e, int y, int x)
+{
+	int		i;
+	int		j;
+	int		pos_y;
+	int		pos_x;
+
+	pos_y = e->win_y - (OFFSET * e->file.nb_y);
+	pos_x = e->win_x - (25 + (OFFSET * e->file.nb_x));
+	j = -1;
+	while (++j <= OFFSET)
+	{
+		i = -1;
+		while (++i <= OFFSET)
+			put_pixel(e, pos_x + (x + i), pos_y + (y + j));
+	}
+}
+
+void			draw_minimap(t_env *e)
 {
 	int 	y;
 	int		x;
+	int		pos_x;
+	int		pos_y;
 
+	pos_y = e->cam.pers_x;
+	pos_x = e->cam.pers_y;
 	y = -1;
-	while (++y < e->win_y - (e->win_y / 4))
+	while (++y < e->file.nb_y)
 	{
 		x = -1;
-		while (++x < e->win_x - (e->win_x / 4))
+		while (++x < e->file.nb_x)
 		{
-//			printf("%d", e->file.map[y][x]);
 			if (e->file.map[y][x] == 1)
-			{
-				change_color(e, 200, 200, 200);
-				put_pixel(e, x, y);
-			}
-			else if (e->file.map[y][x] == 0)
-			{
+				change_color(e, 0, 0, 0);
+			else if (y == pos_y && x == pos_x)
+				change_color(e, 255, 0, 0);
+			else
 				change_color(e, 255, 255, 255);
-				put_pixel(e, x, y);
-			}
-			change_color(e, 255, 0, 0);
-			put_pixel(e, e->cam.pers_x, e->cam.pers_y);
+			draw_tile(e, OFFSET * y, OFFSET * x);
 		}
 	}
 }

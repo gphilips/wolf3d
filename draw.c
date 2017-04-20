@@ -50,10 +50,13 @@ void	draw_wall(t_env *e, int x)
 	y = e->cam.start;
 	while (y < e->cam.end)
 	{
-		if (e->cam.side == 1)
+		change_color(e, 232, 169, 133);
+		if (e->cam.side == 0 && e->cam.step_x == 1)
 			change_color(e, 200, 200, 200);
-		else
+		else if (e->cam.side == 0 && e->cam.step_x == -1)
 			change_color(e, 255, 255, 255);
+		else if (e->cam.side == 1 && e->cam.step_y == 1)
+			change_color(e, 120, 175, 255);
 		put_pixel(e, x, y);
 		y++;
 	}

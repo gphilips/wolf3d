@@ -27,8 +27,8 @@ static void		init_cam(t_env *e)
 	e->cam.dir_y = 0;
 	e->cam.plane_x = 0;
 	e->cam.plane_y = 0.66;
-	e->cam.speed = 0.2;
-	e->cam.rot_speed = 0.1;
+	e->cam.speed = 0.1;
+	e->cam.rot_speed = 0.05;
 }
 
 static void		init_file(t_env *e)
@@ -46,7 +46,7 @@ t_env			*init_all(t_env *e)
 	e->mlx = NULL;
 	e->win = NULL;
 	e->win_x = 1300;
-	e->win_y = 800;
+	e->win_y = 700;
 	e->img = NULL;
 	e->data = NULL;
 	init_file(e);

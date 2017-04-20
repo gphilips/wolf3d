@@ -49,14 +49,22 @@ static int 	quit(t_env *e)
 	exit(0);
 	return (0);
 }
-
+/*
+int			mouse_hook(int button, int x, int y, t_env *e)
+{
+	(void)e;
+	if (button == 1)
+		printf("x : %d y : %d\n", x, y);
+	return (0);
+}
+*/
 int			expose_hook(t_env *e)
 {
 	e->img = mlx_new_image(e->mlx, e->win_x, e->win_y);
 	e->data = mlx_get_data_addr(e->img, &e->bpp, &e->sizeline, &e->endian);
-	draw_minimap(e);
 	raycast(e);
 	move(e);
+	draw_minimap(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
 //	instruction(e);
 	mlx_destroy_image(e->mlx, e->img);
@@ -68,7 +76,7 @@ static int	key_press(int keycode, t_env *e)
 /*	ft_putstr("key : ");
 	ft_putnbr(keycode);
 	ft_putchar('\n');
-*/	if (keycode == ESC || keycode == 7)
+*/	if (keycode == ESC)
 		quit(e);
 	else if (keycode == UP)
 		e->move.up = 1;
@@ -112,6 +120,6 @@ void		create_win(t_env *e)
 	mlx_hook(e->win, KEYPRESS, KEYPRESSMASK, key_press, e);
 	mlx_hook(e->win, KEYRELEASE, KEYRELEASEMASK, key_release, e);
 //	mlx_mouse_hook(e->win, mouse_hook, e);
-	mlx_expose_hook(e->win, expose_hook, e);
+	mlx_loop_hook(e->mlx, expose_hook, e);
 	mlx_loop(e->mlx);
 }

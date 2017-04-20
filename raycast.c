@@ -100,7 +100,7 @@ void			raycast(t_env *e)
 		hit_wall(e);
 		correct_dist(e);
 		calc_height_wall(e);
-//		draw_wall(e, x);
-//		draw_sky_floor(e, x);
+		draw_wall(e, x);
+		draw_sky_floor(e, x);
 	}
 }

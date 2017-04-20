@@ -49,20 +49,22 @@ static void		move_side(t_env *e)
 	if (e->move.s_left == 1)
 	{
 		y = (int)(e->cam.pers_x - e->cam.plane_x * e->cam.speed);
-		x = (int)(e->cam.pers_x);
+		x = (int)(e->cam.pers_y);
 		if (e->file.map[y][x] == 0)
 			e->cam.pers_x -= e->cam.plane_x * e->cam.speed;
-		ft_swap(x, y);
+		y = (int)(e->cam.pers_x);
+		x = (int)(e->cam.pers_y - e->cam.plane_y * e->cam.speed);
 		if (e->file.map[y][x] == 0)
 			e->cam.pers_y -= e->cam.plane_y * e->cam.speed;
 	}
 	else if (e->move.s_right == 1)
 	{
-		y = (int)(e->cam.pers_x - e->cam.plane_x * e->cam.speed);
-		x = (int)(e->cam.pers_x);
+		y = (int)(e->cam.pers_x + e->cam.plane_x * e->cam.speed);
+		x = (int)(e->cam.pers_y);
 		if (e->file.map[y][x] == 0)
 			e->cam.pers_x += e->cam.plane_x * e->cam.speed;
-		ft_swap(x, y);
+		y = (int)(e->cam.pers_x);
+		x = (int)(e->cam.pers_y + e->cam.plane_y * e->cam.speed);
 		if (e->file.map[y][x] == 0)
 			e->cam.pers_y += e->cam.plane_y * e->cam.speed;
 	}

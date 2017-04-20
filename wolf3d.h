@@ -41,13 +41,14 @@
 # define B 11
 # define TAB 48
 # define KEYPRESS 2
-# define KEYPRESSMASK (1L<<2)
+# define KEYPRESSMASK (1L<<0)
 # define KEYRELEASE 3
 # define KEYRELEASEMASK (1L<<1)
 # define CLOSE 17
 # define CLOSEMASK (1L<<17)
 # define MOTIONNOTIFY 6
 # define POINTERMOTIONMASK (1L<<6)
+# define OFFSET 4
 
 typedef struct	s_move
 {
