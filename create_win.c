@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 18:48:36 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/19 18:49:36 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/21 19:29:16 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ int			mouse_hook(int button, int x, int y, t_env *e)
 */
 int			expose_hook(t_env *e)
 {
-	e->img = mlx_new_image(e->mlx, e->win_x, e->win_y);
-	e->data = mlx_get_data_addr(e->img, &e->bpp, &e->sizeline, &e->endian);
+	e->img.img_ptr = mlx_new_image(e->mlx, e->win_x, e->win_y);
+	e->img.data = mlx_get_data_addr(e->img.img_ptr, &e->img.bpp, &e->img.sizeline, &e->img.endian);
 	raycast(e);
 	move(e);
 	draw_minimap(e);
-	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
+	mlx_put_image_to_window(e->mlx, e->win, e->img.img_ptr, 0, 0);
 //	instruction(e);
-	mlx_destroy_image(e->mlx, e->img);
+	mlx_destroy_image(e->mlx, e->img.img_ptr);
 	return (0);
 }
 

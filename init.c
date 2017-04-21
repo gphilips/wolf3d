@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 19:08:15 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/18 18:13:49 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/21 18:26:12 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,13 @@ static void		init_file(t_env *e)
 
 t_env			*init_all(t_env *e)
 {
-	e->mlx = NULL;
-	e->win = NULL;
 	e->win_x = 1300;
 	e->win_y = 700;
-	e->img = NULL;
-	e->data = NULL;
+	e->mlx = NULL;
+	e->win = NULL;
+	e->img.img_ptr = NULL;
+	e->img.data = NULL;
+	e->texture = NULL;
 	init_file(e);
 	init_cam(e);
 	init_color(e);

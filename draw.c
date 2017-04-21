@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:54:25 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/19 17:40:37 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/04/21 18:28:45 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ void	put_pixel(t_env *e, int x, int y)
 
 	if ((x > 0 && x < e->win_x) && (y > 0 && y < e->win_y))
 	{
-		i = (y * e->sizeline) + (x * e->bpp / 8);
-		e->data[i] = e->color.b;
-		e->data[i + 1] = e->color.g;
-		e->data[i + 2] = e->color.r;
+		i = (y * e->img.sizeline) + (x * e->img.bpp / 8);
+		e->img.data[i] = e->color.b;
+		e->img.data[i + 1] = e->color.g;
+		e->img.data[i + 2] = e->color.r;
 	}
 }
 
