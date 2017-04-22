@@ -40,9 +40,8 @@ int			main(int argc, char **argv)
 		return (error(3) == -1 ? -1 : 0);
 	if ((create_int_tab(e->lst, e)) == -1)
 		return (error(4) == -1 ? -1 : 0);
-	create_win(e);
 	if ((close(fd)) == -1)
 		return (error(2) == -1 ? -1 : 0);
-	free_map(e);
+	create_win(e);
 	return (0);
 }

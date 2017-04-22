@@ -45,7 +45,11 @@ static void	instruction(t_env *e)
 
 static int 	quit(t_env *e)
 {
+	if (e->sound != 0)
+		system("killall afplay");
 	mlx_destroy_window(e->mlx, e->win);
+	free_map(e);
+	free(e);
 	exit(0);
 	return (0);
 }
@@ -90,6 +94,8 @@ static int	key_press(int keycode, t_env *e)
 		e->move.s_left = 1;
 	else if (keycode == E_RIGHT)
 		e->move.s_right = 1;
+	else if (keycode == AT || keycode == DEL)
+		change_sound(keycode, e);
 	expose_hook(e);
 	return (0);
 }

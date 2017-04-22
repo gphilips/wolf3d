@@ -40,6 +40,8 @@
 # define G 5
 # define B 11
 # define TAB 48
+# define AT 10
+# define DEL 51
 # define KEYPRESS 2
 # define KEYPRESSMASK (1L<<0)
 # define KEYRELEASE 3
@@ -124,6 +126,7 @@ typedef struct	s_env
 	void	*mlx;
 	void	*win;
 	char	**texture;
+	int		sound;
 	t_img	img;
 	t_img	*text;
 	t_list	*lst;
@@ -147,6 +150,7 @@ void	draw_sky_floor(t_env *e, int x);
 int		move(t_env *e);
 void	print_texture(t_env *e);
 void	draw_minimap(t_env *e);
+void	change_sound(int keycode, t_env *e);
 void	create_win(t_env *e);
 
 void	free_node(void *content, size_t size);
