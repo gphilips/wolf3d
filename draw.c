@@ -66,20 +66,12 @@ void	draw_sky_floor(t_env *e, int x)
 {
 	int		y;
 
-	if (e->cam.end < 0)
-		e->cam.end = e->win_y;
+	y = 0;
+	change_color(e, 143, 212, 255);
+	while (y < e->cam.start)
+		put_pixel(e, x, y++);
 	y = e->cam.end;
 	change_color(e, 100, 100, 100);
 	while (y < e->win_y)
-	{
-		put_pixel(e, x, y);
-		y++;
-	}
-	y = e->cam.end;
-	change_color(e, 143, 212, 255);
-	while (y < e->win_y)
-	{
-		put_pixel(e, x, e->win_y - y - 1);
-		y++;
-	}
+		put_pixel(e, x, y++);
 }

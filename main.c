@@ -12,7 +12,7 @@
 
 #include "wolf3d.h"
 
-static int	error(int n)
+int		error(int n)
 {
 	if (n == 1)
 		ft_putendl_fd("usage: ./wold3d <map>", 2);
@@ -22,6 +22,8 @@ static int	error(int n)
 		ft_putendl_fd("error: bad size of the file", 2);
 	if (n == 4)
 		ft_putendl_fd("error: bad character in the file", 2);
+	if (n == 5)
+		ft_putendl_fd("error: something is wrong with textures", 2);
 	return (-1);
 }
 
@@ -42,6 +44,7 @@ int			main(int argc, char **argv)
 		return (error(4) == -1 ? -1 : 0);
 	if ((close(fd)) == -1)
 		return (error(2) == -1 ? -1 : 0);
-	create_win(e);
+	if ((create_win(e)) == -1)
+		return (error(5) == -1 ? -1 : 0);
 	return (0);
 }

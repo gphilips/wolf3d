@@ -45,10 +45,17 @@ static void	instruction(t_env *e)
 
 static int 	quit(t_env *e)
 {
+	int		i;
+
 	if (e->sound != 0)
 		system("killall afplay");
+	i = -1;
+	while (e->texture[++i])
+		mlx_destroy_image(e->mlx, e->text[i].img_ptr);
 	mlx_destroy_window(e->mlx, e->win);
 	free_map(e);
+	free(e->text);
+	free(e->texture);
 	free(e);
 	exit(0);
 	return (0);
@@ -69,9 +76,11 @@ int			expose_hook(t_env *e)
 	raycast(e);
 	move(e);
 	draw_minimap(e);
+	mlx_put_image_to_window(e->mlx, e->win, e->text[4].img_ptr, 0, 0);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.img_ptr, 0, 0);
-//	instruction(e);
+	set_weapon(e);
 	mlx_destroy_image(e->mlx, e->img.img_ptr);
+//	instruction(e);
 	return (0);
 }
 
@@ -96,6 +105,10 @@ static int	key_press(int keycode, t_env *e)
 		e->move.s_right = 1;
 	else if (keycode == AT || keycode == DEL)
 		change_sound(keycode, e);
+	else if (keycode == TAB)
+		e->weapon = (e->weapon == 0) ? 1 : 0;
+	else if (keycode == SPC && e->weapon == 1)
+		shoot(keycode, e);
 	expose_hook(e);
 	return (0);
 }
@@ -117,15 +130,21 @@ static int	key_release(int keycode, t_env *e)
 	return (0);
 }
 
-void		create_win(t_env *e)
+int		create_win(t_env *e)
 {
 	if (!(e->mlx = mlx_init()))
+	{
 		ft_putendl_fd("Error minilibx init", 2);
+		return (-1);
+	}
 	e->win = mlx_new_window(e->mlx, e->win_x, e->win_y, "Wolf 3D");
+	if ((init_texture(e)) == -1)
+		return (-1);
 	mlx_hook(e->win, CLOSE, CLOSEMASK, quit, e);
 	mlx_hook(e->win, KEYPRESS, KEYPRESSMASK, key_press, e);
 	mlx_hook(e->win, KEYRELEASE, KEYRELEASEMASK, key_release, e);
 //	mlx_mouse_hook(e->win, mouse_hook, e);
 	mlx_loop_hook(e->mlx, expose_hook, e);
 	mlx_loop(e->mlx);
+	return (0);
 }

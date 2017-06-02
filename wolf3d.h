@@ -42,6 +42,7 @@
 # define TAB 48
 # define AT 10
 # define DEL 51
+# define SPC 49
 # define KEYPRESS 2
 # define KEYPRESSMASK (1L<<0)
 # define KEYRELEASE 3
@@ -115,8 +116,6 @@ typedef struct	s_img
 	int		sizeline;
 	int		endian;
 	char	*data;
-	int		*width;
-	int		*height;
 }				t_img;
 
 typedef struct	s_env
@@ -127,6 +126,8 @@ typedef struct	s_env
 	void	*win;
 	char	**texture;
 	int		sound;
+	int		weapon;
+	int		shot;
 	t_img	img;
 	t_img	*text;
 	t_list	*lst;
@@ -146,13 +147,16 @@ void	put_pixel(t_env *e, int x, int y);
 void	calc_height_wall(t_env *e);
 void	draw_wall(t_env *e, int x);
 void	draw_sky_floor(t_env *e, int x);
+int		init_texture(t_env *e);
 
 int		move(t_env *e);
-void	print_texture(t_env *e);
 void	draw_minimap(t_env *e);
 void	change_sound(int keycode, t_env *e);
-void	create_win(t_env *e);
+void	set_weapon(t_env *e);
+void	shoot(int keycode, t_env *e);
+int		create_win(t_env *e);
 
+int		error(int n);
 void	free_node(void *content, size_t size);
 void	free_map(t_env *e);
 #endif

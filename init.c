@@ -47,10 +47,10 @@ t_env			*init_all(t_env *e)
 	e->win_y = 700;
 	e->mlx = NULL;
 	e->win = NULL;
-	e->img.img_ptr = NULL;
-	e->img.data = NULL;
 	e->texture = NULL;
 	e->sound = 0;
+	e->weapon = 0;
+	e->shot = 0;
 	init_file(e);
 	init_cam(e);
 	init_color(e);
