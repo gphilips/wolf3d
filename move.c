@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/18 16:54:17 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/18 18:44:55 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/06/02 16:09:25 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void		move_side(t_env *e)
 	}
 }
 
-static void		move_turn(t_env *e)
+static void		move_turn_right(t_env *e)
 {
 	double	olddir_x;
 	double	oldplane_x;
@@ -78,27 +78,43 @@ static void		move_turn(t_env *e)
 	if (e->move.right == 1)
 	{
 		olddir_x = e->cam.dir_x;
-		e->cam.dir_x = e->cam.dir_x * cos(e->cam.rot_speed) - e->cam.dir_y * sin(e->cam.rot_speed);
-		e->cam.dir_y = olddir_x * sin(e->cam.rot_speed) + e->cam.dir_y * cos(e->cam.rot_speed);
+		e->cam.dir_x = e->cam.dir_x * cos(e->cam.rot_speed) -
+			e->cam.dir_y * sin(e->cam.rot_speed);
+		e->cam.dir_y = olddir_x * sin(e->cam.rot_speed) +
+			e->cam.dir_y * cos(e->cam.rot_speed);
 		oldplane_x = e->cam.plane_x;
-		e->cam.plane_x = e->cam.plane_x * cos(e->cam.rot_speed) - e->cam.plane_y * sin(e->cam.rot_speed);
-		e->cam.plane_y = oldplane_x * sin(e->cam.rot_speed) + e->cam.plane_y * cos(e->cam.rot_speed);
-	}
-	else if (e->move.left == 1)
-	{
-		olddir_x = e->cam.dir_x;
-		e->cam.dir_x = e->cam.dir_x * cos(-e->cam.rot_speed) - e->cam.dir_y * sin(-e->cam.rot_speed);
-		e->cam.dir_y = olddir_x * sin(-e->cam.rot_speed) + e->cam.dir_y * cos(-e->cam.rot_speed);
-		oldplane_x = e->cam.plane_x;
-		e->cam.plane_x = e->cam.plane_x * cos(-e->cam.rot_speed) - e->cam.plane_y * sin(-e->cam.rot_speed);
-		e->cam.plane_y = oldplane_x * sin(-e->cam.rot_speed) + e->cam.plane_y * cos(-e->cam.rot_speed);
+		e->cam.plane_x = e->cam.plane_x * cos(e->cam.rot_speed) -
+			e->cam.plane_y * sin(e->cam.rot_speed);
+		e->cam.plane_y = oldplane_x * sin(e->cam.rot_speed) +
+			e->cam.plane_y * cos(e->cam.rot_speed);
 	}
 }
 
-int			move(t_env *e)
+static void		move_turn_left(t_env *e)
+{
+	double	olddir_x;
+	double	oldplane_x;
+
+	if (e->move.left == 1)
+	{
+		olddir_x = e->cam.dir_x;
+		e->cam.dir_x = e->cam.dir_x * cos(-e->cam.rot_speed) -
+			e->cam.dir_y * sin(-e->cam.rot_speed);
+		e->cam.dir_y = olddir_x * sin(-e->cam.rot_speed) +
+			e->cam.dir_y * cos(-e->cam.rot_speed);
+		oldplane_x = e->cam.plane_x;
+		e->cam.plane_x = e->cam.plane_x * cos(-e->cam.rot_speed) -
+			e->cam.plane_y * sin(-e->cam.rot_speed);
+		e->cam.plane_y = oldplane_x * sin(-e->cam.rot_speed) +
+			e->cam.plane_y * cos(-e->cam.rot_speed);
+	}
+}
+
+int				move(t_env *e)
 {
 	move_front_back(e);
 	move_side(e);
-	move_turn(e);
+	move_turn_right(e);
+	move_turn_left(e);
 	return (0);
 }

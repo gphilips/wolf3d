@@ -6,13 +6,13 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 18:48:36 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/21 19:29:16 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/06/02 16:49:42 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
-/*
-static void	instruction(t_env *e)
+
+/* static void	instruction(t_env *e)
 {
 	char	*line;
 	char	*zoom_in;
@@ -60,24 +60,27 @@ static int 	quit(t_env *e)
 	exit(0);
 	return (0);
 }
-/*
-int			mouse_hook(int button, int x, int y, t_env *e)
+
+/*int			mouse_hook(int button, int x, int y, t_env *e)
 {
 	(void)e;
 	if (button == 1)
 		printf("x : %d y : %d\n", x, y);
 	return (0);
-}
-*/
+}*/
+
 int			expose_hook(t_env *e)
 {
 	e->img.img_ptr = mlx_new_image(e->mlx, e->win_x, e->win_y);
-	e->img.data = mlx_get_data_addr(e->img.img_ptr, &e->img.bpp, &e->img.sizeline, &e->img.endian);
+	e->img.data = mlx_get_data_addr(e->img.img_ptr, &e->img.bpp,
+			&e->img.sizeline, &e->img.endian);
 	raycast(e);
 	move(e);
 	draw_minimap(e);
-	mlx_put_image_to_window(e->mlx, e->win, e->text[4].img_ptr, 0, 0);
+//	mlx_put_image_to_window(e->mlx, e->win, e->text[4].img_ptr, 0, 0);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.img_ptr, 0, 0);
+	if (e->sound == 0)
+		mlx_put_image_to_window(e->mlx, e->win, e->text[5].img_ptr, 10, 665);
 	set_weapon(e);
 	mlx_destroy_image(e->mlx, e->img.img_ptr);
 //	instruction(e);
@@ -130,7 +133,7 @@ static int	key_release(int keycode, t_env *e)
 	return (0);
 }
 
-int		create_win(t_env *e)
+int			create_win(t_env *e)
 {
 	if (!(e->mlx = mlx_init()))
 	{

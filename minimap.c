@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 17:26:40 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/19 18:56:42 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/06/02 15:58:17 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void		draw_tile(t_env *e, int y, int x)
 
 void			draw_minimap(t_env *e)
 {
-	int 	y;
+	int		y;
 	int		x;
 	int		pos_x;
 	int		pos_y;

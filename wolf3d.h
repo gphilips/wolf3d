@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 18:03:01 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/21 19:29:11 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/06/02 19:05:20 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # define G 5
 # define B 11
 # define TAB 48
-# define AT 10
+# define AT 50
 # define DEL 51
 # define SPC 49
 # define KEYPRESS 2
@@ -95,6 +95,9 @@ typedef struct	s_cam
 	int		line_h;
 	int		start;
 	int		end;
+	float	wallx;
+	int		texx;
+	int		tex_width;
 	float	speed;
 	float	rot_speed;
 }				t_cam;
@@ -112,9 +115,9 @@ typedef struct	s_file
 typedef struct	s_img
 {
 	void	*img_ptr;
-	int		bpp;
-	int		sizeline;
-	int		endian;
+	int		*bpp;
+	int		*sizeline;
+	int		*endian;
 	char	*data;
 }				t_img;
 

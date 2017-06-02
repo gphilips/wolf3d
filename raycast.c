@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 17:03:38 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/19 17:43:12 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/06/02 15:59:46 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ static void		set_ray(t_env *e, int x)
 	e->cam.raydir_y = e->cam.dir_y + e->cam.plane_y * e->cam.cam_x;
 	e->file.map_x = (int)(e->cam.ray_x);
 	e->file.map_y = (int)(e->cam.ray_y);
-	e->cam.ddist_x = sqrt(1 + (e->cam.raydir_y * e->cam.raydir_y) / (e->cam.raydir_x * e->cam.raydir_x));
-	e->cam.ddist_y = sqrt(1 + (e->cam.raydir_x * e->cam.raydir_x) / (e->cam.raydir_y * e->cam.raydir_y));
+	e->cam.ddist_x = sqrt(1 + (e->cam.raydir_y * e->cam.raydir_y) /
+			(e->cam.raydir_x * e->cam.raydir_x));
+	e->cam.ddist_y = sqrt(1 + (e->cam.raydir_x * e->cam.raydir_x) /
+			(e->cam.raydir_y * e->cam.raydir_y));
 	e->cam.hit = 0;
 }
 

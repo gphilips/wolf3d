@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 19:04:44 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/02 16:30:27 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/06/02 15:56:35 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		error(int n)
 	return (-1);
 }
 
-int			main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	t_env	*e;
 	int		fd;
