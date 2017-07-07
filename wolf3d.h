@@ -98,6 +98,7 @@ typedef struct	s_cam
 	float	wallx;
 	int		texx;
 	int		tex_width;
+	int		tex_height;
 	float	speed;
 	float	rot_speed;
 }				t_cam;
@@ -115,9 +116,9 @@ typedef struct	s_file
 typedef struct	s_img
 {
 	void	*img_ptr;
-	int		*bpp;
-	int		*sizeline;
-	int		*endian;
+	int		bpp;
+	int		sizeline;
+	int		endian;
 	char	*data;
 }				t_img;
 
@@ -147,6 +148,7 @@ int		create_int_tab(t_list *lst, t_env *e);
 void	raycast(t_env *e);
 void	change_color(t_env *e, int r, int g, int b);
 void	put_pixel(t_env *e, int x, int y);
+void	put_pixel_tex(t_env *e, int x, int y, int j);
 void	calc_height_wall(t_env *e);
 void	draw_wall(t_env *e, int x);
 void	draw_sky_floor(t_env *e, int x);
@@ -157,6 +159,7 @@ void	draw_minimap(t_env *e);
 void	change_sound(int keycode, t_env *e);
 void	set_weapon(t_env *e);
 void	shoot(int keycode, t_env *e);
+void	open_door(int keycode, t_env *e);
 int		create_win(t_env *e);
 
 int		error(int n);

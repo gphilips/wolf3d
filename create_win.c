@@ -112,6 +112,8 @@ static int	key_press(int keycode, t_env *e)
 		e->weapon = (e->weapon == 0) ? 1 : 0;
 	else if (keycode == SPC && e->weapon == 1)
 		shoot(keycode, e);
+	else if (keycode == ENT)
+		open_door(keycode, e);
 	expose_hook(e);
 	return (0);
 }

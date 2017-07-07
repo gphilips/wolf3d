@@ -14,7 +14,10 @@
 
 static int	check_num(t_env *e, int x)
 {
-	return ((*e->file.split[x] != '1' && *e->file.split[x] != '0') ? -1 : 0);
+	if (*e->file.split[x] != '1' && *e->file.split[x] != '0'
+		&& *e->file.split[x] != '2')
+		return (-1);
+	return (0);
 }
 
 int			create_int_tab(t_list *lst, t_env *e)

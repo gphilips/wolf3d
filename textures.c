@@ -33,7 +33,7 @@ int			init_texture(t_env *e)
 	{
 		e->text[i].img_ptr = mlx_xpm_file_to_image(e->mlx, e->texture[i],
 				&w, &h);
-		e->text[i].data = mlx_get_data_addr(e->text[i].img_ptr, e->text[i].bpp, e->text[i].sizeline, e->text[i].endian);
+		e->text[i].data = mlx_get_data_addr(e->text[i].img_ptr, &e->text[i].bpp, &e->text[i].sizeline, &e->text[i].endian);
 	}
 //	mlx_put_image_to_window(e->mlx, e->win, e->text[4].img_ptr, 0, 0);
 	return (0);
@@ -83,7 +83,7 @@ void		shoot(int keycode, t_env *e)
 {
 	if (keycode == SPC)
 	{
-		system("afplay musics/gunshot.mp3 -v 0.8&");
+		system("afplay musics/gunshot.mp3 -v 0.5&");
 		e->shot = 1;
 	}
 }
