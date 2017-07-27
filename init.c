@@ -29,8 +29,6 @@ static void		init_cam(t_env *e)
 	e->cam.plane_y = 0.66;
 	e->cam.speed = 0.1;
 	e->cam.rot_speed = 0.05;
-	e->cam.tex_width = 65;
-	e->cam.tex_height = 65;
 }
 
 static void		init_file(t_env *e)
@@ -53,6 +51,7 @@ t_env			*init_all(t_env *e)
 	e->sound = 0;
 	e->weapon = 0;
 	e->shot = 0;
+	e->instruction = 0;
 	init_file(e);
 	init_cam(e);
 	init_color(e);

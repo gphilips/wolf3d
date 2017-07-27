@@ -46,7 +46,7 @@ void	calc_height_wall(t_env *e)
 void	draw_wall(t_env *e, int x)
 {
 	int		y;
-
+	
 	y = e->cam.start;
 	while (y < e->cam.end)
 	{

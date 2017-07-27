@@ -12,6 +12,23 @@
 
 #include "wolf3d.h"
 
+void	instruction(t_env *e)
+{
+	mlx_string_put(e->mlx, e->win, 10, 0, 0x00FFFFFF, "COMMANDS");
+	mlx_string_put(e->mlx, e->win, 10, 10, 0x00FFFFFF, LINE);
+	mlx_string_put(e->mlx, e->win, 10, 30, 0x00FFFFFF, MOVE);
+	mlx_string_put(e->mlx, e->win, 10, 50, 0x00FFFFFF, ASIDE);
+	mlx_string_put(e->mlx, e->win, 10, 70, 0x00FFFFFF, TABULATION);
+	mlx_string_put(e->mlx, e->win, 10, 90, 0x00FFFFFF, SPACE);
+	mlx_string_put(e->mlx, e->win, 10, 110, 0x00FFFFFF, AROBASE);
+	mlx_string_put(e->mlx, e->win, 10, 130, 0x00FFFFFF, DELETE);
+	mlx_string_put(e->mlx, e->win, 10, 150, 0x00FFFFFF, ENTER);
+	mlx_string_put(e->mlx, e->win, 10, 170, 0x00FFFFFF, HELP);
+	mlx_string_put(e->mlx, e->win, 10, 190, 0x00FFFFFF, FAST);
+	mlx_string_put(e->mlx, e->win, 10, 210, 0x00FFFFFF, CLOSER);
+}
+
+
 int		error(int n)
 {
 	if (n == 1)

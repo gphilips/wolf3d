@@ -20,29 +20,20 @@
 # include <mlx.h>
 # include <math.h>
 
-# include <stdio.h>
-
 # define ESC 53
-# define P 35
-# define L 37
 # define UP 126
 # define DOWN 125
 # define LEFT 123
 # define RIGHT 124
 # define ENT 36
-# define CLICK_L 1
-# define CLICK_R 2
-# define SCROLL_UP 4
-# define SCROLL_DOWN 5
+# define H 4
 # define Q_LEFT 12
 # define E_RIGHT 14
-# define R 15
-# define G 5
-# define B 11
 # define TAB 48
 # define AT 50
 # define DEL 51
 # define SPC 49
+# define SHIFT 257
 # define KEYPRESS 2
 # define KEYPRESSMASK (1L<<0)
 # define KEYRELEASE 3
@@ -52,6 +43,18 @@
 # define MOTIONNOTIFY 6
 # define POINTERMOTIONMASK (1L<<6)
 # define OFFSET 4
+
+# define LINE "___________________"
+# define MOVE "UP|DOWN|LEFT|RIGHT : Move\n"
+# define ASIDE "Q|E : Move aside\n"
+# define TABULATION "TAB : Change the gun\n"
+# define SPACE "SPACE : Shoot with the gun\n"
+# define AROBASE "BACKTICK : Change the music\n"
+# define DELETE "DEL : Turn off the music\n"
+# define ENTER "ENTER : Open secret doors\n"
+# define HELP "H : Get instruction\n"
+# define FAST "SHIFT : Move faster\n"
+# define CLOSER "ESC|RED_BTN : Turn off the game\n"
 
 typedef struct	s_move
 {
@@ -95,10 +98,7 @@ typedef struct	s_cam
 	int		line_h;
 	int		start;
 	int		end;
-	float	wallx;
-	int		texx;
-	int		tex_width;
-	int		tex_height;
+	double	wall_x;
 	float	speed;
 	float	rot_speed;
 }				t_cam;
@@ -132,6 +132,7 @@ typedef struct	s_env
 	int		sound;
 	int		weapon;
 	int		shot;
+	int		instruction;
 	t_img	img;
 	t_img	*text;
 	t_list	*lst;
@@ -144,6 +145,7 @@ typedef struct	s_env
 t_env	*init_all(t_env *e);
 int		read_file(int fd, t_env *e);
 int		create_int_tab(t_list *lst, t_env *e);
+void	instruction(t_env *e);
 
 void	raycast(t_env *e);
 void	change_color(t_env *e, int r, int g, int b);
