@@ -54,11 +54,6 @@ int			read_file(int fd, t_env *e)
 
 	e->lst = NULL;
 	line = NULL;
-	if (get_next_line(fd, &line) < 1)
-		return (-1);
-	e->lst = ft_lstnew(line, ft_strlen(line) + 1);
-	free(line);
-	e->file.nb_y++;
 	while (get_next_line(fd, &line))
 	{
 		ft_lst_push_back(&e->lst, line);

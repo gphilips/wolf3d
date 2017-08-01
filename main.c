@@ -51,17 +51,17 @@ int		main(int argc, char **argv)
 
 	e = (t_env*)ft_memalloc(sizeof(t_env));
 	if (argc != 2)
-		return (error(1) == -1 ? -1 : 0);
+		return (error(1));
 	if ((fd = open(argv[1], O_RDONLY)) < 0)
-		return (error(2) == -1 ? -1 : 0);
+		return (error(2));
 	e = init_all(e);
 	if (read_file(fd, e) == -1)
-		return (error(3) == -1 ? -1 : 0);
+		return (error(3));
 	if ((create_int_tab(e->lst, e)) == -1)
-		return (error(4) == -1 ? -1 : 0);
+		return (error(4));
 	if ((close(fd)) == -1)
-		return (error(2) == -1 ? -1 : 0);
+		return (error(2));
 	if ((create_win(e)) == -1)
-		return (error(5) == -1 ? -1 : 0);
+		return (error(5));
 	return (0);
 }

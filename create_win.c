@@ -73,7 +73,7 @@ static int	key_press(int keycode, t_env *e)
 	else if (keycode == ENT)
 		open_door(keycode, e);
 	else if (keycode == SHIFT)
-		e->cam.speed = 0.2;
+		e->cam.speed = 0.15;
 	else if (keycode == H)
 		e->instruction = (e->instruction == 0) ? 1 : 0;
 	expose_hook(e);

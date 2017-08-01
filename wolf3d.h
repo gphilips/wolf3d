@@ -40,8 +40,6 @@
 # define KEYRELEASEMASK (1L<<1)
 # define CLOSE 17
 # define CLOSEMASK (1L<<17)
-# define MOTIONNOTIFY 6
-# define POINTERMOTIONMASK (1L<<6)
 # define OFFSET 4
 
 # define LINE "___________________"
