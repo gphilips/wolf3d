@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/02 17:15:57 by gphilips          #+#    #+#             */
-/*   Updated: 2017/08/02 18:15:44 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/08/02 19:43:02 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		key_release(int keycode, t_env *e)
 	else if (keycode == RIGHT)
 		e->move.right = 0;
 	else if (keycode == Q_LEFT)
-		e->move.s_right = 0;
+		e->move.s_left = 0;
 	else if (keycode == E_RIGHT)
 		e->move.s_right = 0;
 	else if (keycode == SHIFT)
