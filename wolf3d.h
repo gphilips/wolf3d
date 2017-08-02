@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 18:03:01 by gphilips          #+#    #+#             */
-/*   Updated: 2017/06/02 19:05:20 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/08/02 18:57:00 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,29 +140,30 @@ typedef struct	s_env
 	t_move	move;
 }				t_env;
 
-t_env	*init_all(t_env *e);
-int		read_file(int fd, t_env *e);
-int		create_int_tab(t_list *lst, t_env *e);
-void	instruction(t_env *e);
+t_env			*init_all(t_env *e);
+int				read_file(int fd, t_env *e);
+int				create_int_tab(t_list *lst, t_env *e);
+void			instruction(t_env *e);
 
-void	raycast(t_env *e);
-void	change_color(t_env *e, int r, int g, int b);
-void	put_pixel(t_env *e, int x, int y);
-void	put_pixel_tex(t_env *e, int x, int y, int j);
-void	calc_height_wall(t_env *e);
-void	draw_wall(t_env *e, int x);
-void	draw_sky_floor(t_env *e, int x);
-int		init_texture(t_env *e);
+void			raycast(t_env *e);
+void			change_color(t_env *e, int r, int g, int b);
+void			put_pixel(t_env *e, int x, int y);
+void			calc_height_wall(t_env *e);
+void			draw_wall(t_env *e, int x);
+void			draw_sky_floor(t_env *e, int x);
+int				init_texture(t_env *e);
 
-int		move(t_env *e);
-void	draw_minimap(t_env *e);
-void	change_sound(int keycode, t_env *e);
-void	set_weapon(t_env *e);
-void	shoot(int keycode, t_env *e);
-void	open_door(int keycode, t_env *e);
-int		create_win(t_env *e);
+int				move(t_env *e);
+void			draw_minimap(t_env *e);
+void			change_sound(int keycode, t_env *e);
+void			set_weapon(t_env *e);
+void			shoot(int keycode, t_env *e);
+void			open_door(int keycode, t_env *e);
+void			key_onpress(int keycode, t_env *e);
+int				key_release(int keycode, t_env *e);
+int				create_win(t_env *e);
 
-int		error(int n);
-void	free_node(void *content, size_t size);
-void	free_map(t_env *e);
+int				error(int n);
+void			free_node(void *content, size_t size);
+void			free_map(t_env *e);
 #endif

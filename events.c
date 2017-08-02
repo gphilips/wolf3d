@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/02 15:55:48 by gphilips          #+#    #+#             */
-/*   Updated: 2017/06/02 16:25:35 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/08/02 17:08:27 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,3 @@ void		open_door(int keycode, t_env *e)
 	if (keycode == ENT && e->file.map[y][x] == 2)
 		e->file.map[y][x] = 0;
 }
-

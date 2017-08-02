@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 19:08:15 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/21 18:26:12 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/08/02 16:57:09 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void		init_color(t_env *e)
 static void		init_cam(t_env *e)
 {
 	e->cam.pers_x = 3;
-	e->cam.pers_y = 3;
+	e->cam.pers_y = 2;
 	e->cam.dir_x = 1;
 	e->cam.dir_y = 0;
 	e->cam.plane_x = 0;

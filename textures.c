@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/21 15:33:03 by gphilips          #+#    #+#             */
-/*   Updated: 2017/06/02 19:05:44 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/08/02 18:26:26 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,13 @@ int		init_texture(t_env *e)
 	{
 		e->text[i].img_ptr = mlx_xpm_file_to_image(e->mlx, e->texture[i],
 				&w, &h);
-		e->text[i].data = mlx_get_data_addr(e->text[i].img_ptr, &e->text[i].bpp, &e->text[i].sizeline, &e->text[i].endian);
+		e->text[i].data = mlx_get_data_addr(e->text[i].img_ptr,
+				&e->text[i].bpp, &e->text[i].sizeline, &e->text[i].endian);
 	}
 	return (0);
 }
 
-void		set_weapon(t_env *e)
+void	set_weapon(t_env *e)
 {
 	int		x;
 	int		y;

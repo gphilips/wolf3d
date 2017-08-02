@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/31 17:54:25 by gphilips          #+#    #+#             */
-/*   Updated: 2017/04/21 18:28:45 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/08/02 17:09:40 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	calc_height_wall(t_env *e)
 void	draw_wall(t_env *e, int x)
 {
 	int		y;
-	
+
 	y = e->cam.start;
 	while (y < e->cam.end)
 	{

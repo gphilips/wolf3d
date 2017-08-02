@@ -6,13 +6,13 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 18:48:36 by gphilips          #+#    #+#             */
-/*   Updated: 2017/06/02 16:49:42 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/08/02 18:20:32 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-static int 	quit(t_env *e)
+static int	quit(t_env *e)
 {
 	int		i;
 
@@ -40,10 +40,13 @@ int			expose_hook(t_env *e)
 	draw_minimap(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.img_ptr, 0, 0);
 	if (e->sound == 0)
-		mlx_put_image_to_window(e->mlx, e->win, e->text[4].img_ptr, 10, 665);
+	{
+		mlx_put_image_to_window(e->mlx, e->win,
+				e->text[4].img_ptr, 10, 665);
+	}
 	set_weapon(e);
 	mlx_destroy_image(e->mlx, e->img.img_ptr);
-	if (e->instruction == 1) 
+	if (e->instruction == 1)
 		instruction(e);
 	return (0);
 }
@@ -52,18 +55,6 @@ static int	key_press(int keycode, t_env *e)
 {
 	if (keycode == ESC)
 		quit(e);
-	else if (keycode == UP)
-		e->move.up = 1;
-	else if (keycode == DOWN)
-		e->move.down = 1;
-	else if (keycode == LEFT)
-		e->move.left = 1;
-	else if (keycode == RIGHT)
-		e->move.right = 1;
-	else if (keycode == Q_LEFT)
-		e->move.s_left = 1;
-	else if (keycode == E_RIGHT)
-		e->move.s_right = 1;
 	else if (keycode == AT || keycode == DEL)
 		change_sound(keycode, e);
 	else if (keycode == TAB)
@@ -76,26 +67,8 @@ static int	key_press(int keycode, t_env *e)
 		e->cam.speed = 0.15;
 	else if (keycode == H)
 		e->instruction = (e->instruction == 0) ? 1 : 0;
+	key_onpress(keycode, e);
 	expose_hook(e);
-	return (0);
-}
-
-static int	key_release(int keycode, t_env *e)
-{
-	if (keycode == UP)
-		e->move.up = 0;
-	else if (keycode == DOWN)
-		e->move.down = 0;
-	else if (keycode == LEFT)
-		e->move.left = 0;
-	else if (keycode == RIGHT)
-		e->move.right = 0;
-	else if (keycode == Q_LEFT)
-		e->move.s_left = 0;
-	else if (keycode == E_RIGHT)
-		e->move.s_right = 0;
-	else if (keycode == SHIFT)
-		e->cam.speed = 0.1;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 19:04:44 by gphilips          #+#    #+#             */
-/*   Updated: 2017/06/02 15:56:35 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/08/02 17:09:01 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	instruction(t_env *e)
 	mlx_string_put(e->mlx, e->win, 10, 190, 0x00FFFFFF, FAST);
 	mlx_string_put(e->mlx, e->win, 10, 210, 0x00FFFFFF, CLOSER);
 }
-
 
 int		error(int n)
 {
