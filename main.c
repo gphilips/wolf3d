@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 19:04:44 by gphilips          #+#    #+#             */
-/*   Updated: 2017/08/02 17:09:01 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/08/03 19:24:26 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int		error(int n)
 		ft_putendl_fd("error: bad character in the file", 2);
 	if (n == 5)
 		ft_putendl_fd("error: something is wrong with textures", 2);
+	if (n == 6)
+		ft_putendl_fd("error: cannot allocate memory", 2);
 	return (-1);
 }
 
@@ -48,7 +50,8 @@ int		main(int argc, char **argv)
 	t_env	*e;
 	int		fd;
 
-	e = (t_env*)ft_memalloc(sizeof(t_env));
+	if (!(e = (t_env*)ft_memalloc(sizeof(t_env))))
+		return (error(6));
 	if (argc != 2)
 		return (error(1));
 	if ((fd = open(argv[1], O_RDONLY)) < 0)

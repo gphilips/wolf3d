@@ -6,7 +6,7 @@
 #    By: gphilips <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/03/29 19:19:11 by gphilips          #+#    #+#              #
-#    Updated: 2017/08/02 18:18:32 by gphilips         ###   ########.fr        #
+#    Updated: 2017/08/03 19:54:53 by gphilips         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,9 @@ all: $(NAME)
 
 .PHONY: all clean fclean re
 
-$(NAME):
+$(NAME): $(OBJ)
 	@make -C $(LIBDIR)
-	@gcc $(CFLAGS) -c $(SRC)
-	@gcc -o $@ $(OBJ) $(LIBPATH) $(MLX)
+	@gcc -o $(NAME) $(OBJ) $(LIBPATH) $(MLX)
 	@echo "$@ created"
 
 clean:

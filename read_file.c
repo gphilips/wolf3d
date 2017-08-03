@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/29 18:04:28 by gphilips          #+#    #+#             */
-/*   Updated: 2017/08/02 18:37:02 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/08/03 19:43:38 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,22 @@ static int	check_size(t_env *e)
 
 static int	get_size(t_env *e)
 {
-	t_list	*tmp;
+	t_list	*lst;
+	char	**tmp;
 
-	tmp = e->lst;
-	if (tmp == NULL)
+	lst = e->lst;
+	if (lst == NULL)
 		return (-1);
-	while (tmp)
+	while (lst)
 	{
-		e->file.split = ft_strsplit(tmp->content, ' ');
+		tmp = e->file.split;
+		e->file.split = ft_strsplit(lst->content, ' ');
+		free(tmp);
 		if (e->file.split == '\0' && e->file.nb_y < 2)
 			return (-1);
 		if (check_size(e) == -1)
 			return (-1);
-		tmp = tmp->next;
+		lst = lst->next;
 	}
 	return (0);
 }

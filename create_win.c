@@ -6,7 +6,7 @@
 /*   By: gphilips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/04 18:48:36 by gphilips          #+#    #+#             */
-/*   Updated: 2017/08/02 19:45:32 by gphilips         ###   ########.fr       */
+/*   Updated: 2017/08/03 18:56:56 by gphilips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int	key_press(int keycode, t_env *e)
 	if (keycode == ESC)
 		quit(e);
 	else if (keycode == UP || keycode == DOWN
-			|| keycode == LEFT keycode == RIGHT
+			|| keycode == LEFT || keycode == RIGHT
 			|| keycode == Q_LEFT || keycode == E_RIGHT)
 		key_onpress(keycode, e);
 	else if (keycode == AT || keycode == DEL)
