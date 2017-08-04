@@ -21,14 +21,14 @@ LIB = libft.a
 LIBPATH = $(addprefix $(LIBDIR), $(LIB))
 OBJ = $(SRC:.c=.o)
 
-all: $(NAME)
-
 .PHONY: all clean fclean re
 
 $(NAME): $(OBJ)
 	@make -C $(LIBDIR)
 	@gcc -o $(NAME) $(OBJ) $(LIBPATH) $(MLX)
 	@echo "$@ created"
+
+all: $(NAME)
 
 clean:
 	@make clean -C $(LIBDIR)

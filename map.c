@@ -87,13 +87,16 @@ int			create_int_tab(t_list *lst, t_env *e)
 {
 	int		y;
 	t_list	**start;
+	char	**tmp;
 
 	start = &lst;
 	e->file.map = (int**)ft_memalloc(sizeof(int*) * e->file.nb_y);
 	y = -1;
 	while (++y < e->file.nb_y)
 	{
+		tmp = e->file.split;
 		e->file.split = ft_strsplit((char*)lst->content, ' ');
+		free(tmp);
 		e->file.map[y] = (int*)ft_memalloc(sizeof(int) * e->file.nb_x);
 		add_line(e, y);
 		lst = lst->next;
